@@ -2,6 +2,8 @@ package com.example.coleman.hcigroupproject.XML;
 
 import android.content.Context;
 
+import com.example.coleman.hcigroupproject.TODO;
+
 import org.w3c.dom.Element;
 
 import java.io.File;
@@ -17,10 +19,11 @@ public class DataParser {
     XMLReader reader;
     PrintWriter out;
 
-    ArrayList<String> data;
+    ArrayList<TODO> data;
 
     public DataParser(Context context){
         try {
+            data=new ArrayList<TODO>();
             file = new File(context.getFilesDir(),"todo.xml");
             if (!file.exists()) {
                 file.createNewFile();
@@ -57,7 +60,7 @@ public class DataParser {
     /*
     for now use String[] maybe later change to some kind of class like TODO[]
      */
-    public String[] getData(){
-        return data.toArray(new String[data.size()]);
+    public TODO[] getData(){
+        return data.toArray(new TODO[data.size()]);
     }
 }
