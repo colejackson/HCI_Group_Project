@@ -1,5 +1,7 @@
 package com.example.coleman.hcigroupproject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,6 +19,16 @@ public class TODO {
 
     public void setName(String name){
         this.name=name;
+    }
+
+    public String getName(){return name;}
+
+    public String getDescription(){return description;}
+
+    public String getDate(){
+        DateFormat formater=new SimpleDateFormat();
+
+        return formater.format(dueDate);
     }
 
     public void setDescription(String description){

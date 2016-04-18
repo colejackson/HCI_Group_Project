@@ -48,9 +48,20 @@ public class DataParser {
             file.delete();
             out=new PrintWriter(file);
             out.print("<base>");
+            for(TODO todo:data) {
                 out.print("<todo>");
-                    //figure out what the other tags I will need like the name and details and such
+                //figure out what the other tags I will need like the name and details and such
+                    out.print("<name>");
+                        out.print(todo.getName());
+                    out.print("</name>");
+                    out.print("<description>");
+                        out.print(todo.getDescription());
+                    out.print("</description>");
+                    out.print("<date>");
+                        out.print(todo.getDate());
+                    out.print("</date>");
                 out.print("</todo>");
+            }
             out.println("</base>");
             out.flush();
             out.close();
@@ -62,5 +73,13 @@ public class DataParser {
      */
     public TODO[] getData(){
         return data.toArray(new TODO[data.size()]);
+    }
+
+    public void remove(String name){
+        for(TODO todo:data) {
+            if(todo.getName().equals(name)){
+                data.remove(todo);
+            }
+        }
     }
 }
