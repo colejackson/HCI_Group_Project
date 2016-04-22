@@ -22,8 +22,8 @@ import java.util.Date;
  */
 public class DataParser
 {
-    private static final int CATEGORY = 0;
-    private static final int NOTE = 1;
+    public static final int CATEGORY = 0;
+    public static final int NOTE = 1;
 
     private File file;
     private File dir;
@@ -110,7 +110,7 @@ public class DataParser
         }
     }
 
-    public void saveData()
+    private void saveData()
     {
         try{
             file.delete();
@@ -176,20 +176,7 @@ public class DataParser
     {
         return data.toArray(new Todo[data.size()]);
     }
-
-    public void updateData(ArrayList<Todo> data){this.data=data;}
-
-    public void remove(String name)
-    {
-        for(Todo todo : data)
-        {
-            if(todo.getName().equals(name))
-            {
-                data.remove(todo);
-            }
-        }
-    }
-
+    
     public void addNote(String name, int category, Date date, String note)
     {
         int id;
@@ -207,6 +194,8 @@ public class DataParser
         }
 
         data.add(new Todo(name, note, date, cat, id));
+
+        saveData();
     }
 
     public void addCat(String name)
@@ -221,6 +210,48 @@ public class DataParser
         while(checkID(id, CATEGORY));
 
         categories.add(new Category(id, name, color));
+
+        saveData();
+    }
+
+    public void updateCat(Category c)
+    {
+        for(int j = 0; j < categories.size(); j++)
+        {
+            if(categories.get(j).getid() == c.getid())
+            {
+                categories.set(j, c);
+            }
+        }
+
+        saveData();
+    }
+
+    public void updateNote(Todo t)
+    {
+        for(int j = 0; j < data.size(); j++)
+        {
+            if(data.get(j).getid() == t.getid())
+            {
+                data.set(j, t);
+            }
+        }
+
+        saveData();
+    }
+
+    public void removeCat(Category c)
+    {
+        categories.remove(c);
+
+        saveData();
+    }
+
+    public void removeNote(Todo t)
+    {
+        data.remove(t);
+
+        saveData();
     }
 
     private boolean checkID(int id, int mode)

@@ -23,7 +23,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 {
     private static final int MODE_ALL = 0;
 
-    DataParser parser;
+    private DataParser parser;
+    private ListView events;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -51,11 +52,9 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        ListView events = (ListView) findViewById(R.id.events);
+        events = (ListView) findViewById(R.id.events);
 
-        TodoAdapter adapter = new TodoAdapter(this, parser.getData());
-
-        events.setAdapter(adapter);
+        update();
     }
 
     @Override
@@ -88,6 +87,13 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    private void update()
+    {
+        TodoAdapter adapter = new TodoAdapter(this, parser.getData());
+
+        events.setAdapter(adapter);
     }
 
     /**
