@@ -13,7 +13,8 @@ import java.util.ArrayList;
 /**
  * Created by sirkellsworth on 4/11/16.
  */
-public class DataParser {
+public class DataParser
+{
 
     File file;
     XMLReader reader;
@@ -23,7 +24,7 @@ public class DataParser {
 
     public DataParser(Context context){
         try {
-            data=new ArrayList<TODO>();
+            data=new ArrayList();
             file = new File(context.getFilesDir(),"todo.xml");
             if (!file.exists()) {
                 file.createNewFile();
@@ -43,7 +44,8 @@ public class DataParser {
         }
     }
 
-    public void saveData(){
+    public void saveData()
+    {
         try{
             file.delete();
             out=new PrintWriter(file);
@@ -71,13 +73,17 @@ public class DataParser {
     /*
     for now use String[] maybe later change to some kind of class like TODO[]
      */
-    public TODO[] getData(){
+    public TODO[] getData()
+    {
         return data.toArray(new TODO[data.size()]);
     }
 
-    public void remove(String name){
-        for(TODO todo:data) {
-            if(todo.getName().equals(name)){
+    public void remove(String name)
+    {
+        for(TODO todo : data)
+        {
+            if(todo.getName().equals(name))
+            {
                 data.remove(todo);
             }
         }

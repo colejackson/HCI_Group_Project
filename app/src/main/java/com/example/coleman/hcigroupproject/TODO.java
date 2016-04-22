@@ -13,7 +13,8 @@ public class TODO {
     String description;
     Date dueDate;
 
-    public TODO(){
+    public TODO()
+    {
 
     }
 
