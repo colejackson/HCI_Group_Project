@@ -1,6 +1,4 @@
-package com.example.coleman.hcigroupproject.XML;
-
-import android.util.Log;
+package com.example.coleman.xml;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,8 +15,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by sirkellsworth on 3/13/16.
  */
-public class XMLReader {
-
+public class XMLReader
+{
     private File file;
     private InputStream in;
     private Document document;

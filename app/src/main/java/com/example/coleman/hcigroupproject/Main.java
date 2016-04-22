@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.coleman.hcigroupproject.XML.DataParser;
+import com.example.coleman.adapters.TodoAdapter;
+import com.example.coleman.app_code.Todo;
+import com.example.coleman.xml.DataParser;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
         ListView events = (ListView) findViewById(R.id.events);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.todo_item, getList(mode));
+        TodoAdapter adapter = new TodoAdapter(this, parser.getData());
 
         events.setAdapter(adapter);
     }
@@ -123,26 +123,6 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
-    }
-
-    private ArrayList<String> getList(int mode)
-    {
-        ArrayList<String> ret = new ArrayList<>();
-
-        switch(mode)
-        {
-            case MODE_ALL:
-                TODO[] data = parser.getData();
-                for(int i = 0; i < data.length; i++)
-                    ret.add(data[i].getName());
-                break;
-        }
-
-        ret.add("Hello");
-        ret.add("From");
-        ret.add("Me");
-
-        return ret;
     }
 
 }
