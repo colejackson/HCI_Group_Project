@@ -1,5 +1,6 @@
 package com.example.coleman.hcigroupproject;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.view.View;
@@ -27,21 +28,27 @@ public class newCatagory {
     Dialog dialog;
     Application app;
     DataParser parser;
+    Activity activity;
 
-    public newCatagory(Application app, DataParser parser){
+    public newCatagory(Application app, DataParser parser, Activity activity){
         this.app=app;
         this.parser=parser;
+        this.activity=activity;
     }
 
-    public void showTodo(){
-        dialog=new Dialog(app);
-        dialog.setContentView(R.layout.new_todo);
+    public void showCat(){
+        dialog=new Dialog(activity);
+        dialog.setContentView(R.layout.new_catagory);
         dialog.setTitle("Create New Catagory");
 
         name=(EditText)dialog.findViewById(R.id.name);
         //fill data from some method passed from the main
         color=(Spinner)dialog.findViewById(R.id.color);
-        color.setAdapter(new ColorAdapter(dialog.getOwnerActivity(),new Integer[]{}));
+        color.setAdapter(new ColorAdapter(activity,new Integer[]{app.getResources().getColor(R.color.blue),
+                app.getResources().getColor(R.color.red),
+                app.getResources().getColor(R.color.green),
+                app.getResources().getColor(R.color.purple),
+                app.getResources().getColor(R.color.yellow)}));
 
 
 

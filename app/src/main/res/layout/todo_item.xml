@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/expand"
             android:layout_weight="2"
-            android:src="@drawable/ic_keyboard_arrow_down_24dp" />
+            android:src="@drawable/ic_keyboard_arrow_up_24dp" />
     </LinearLayout>
 
     <LinearLayout

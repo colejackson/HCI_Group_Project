@@ -103,7 +103,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     hiddenrow.setVisibility(View.VISIBLE);
                     notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
-                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
+                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to EDITABLE
                     name.setEnabled(true);
                     dateButton.setEnabled(true);

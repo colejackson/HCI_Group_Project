@@ -30,6 +30,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
     private ListView events;
     private newTodo creater;
     private Context context;
+    private newCatagory catCreator;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -49,9 +50,10 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        parser=new DataParser(this.getApplicationContext());
+        parser=new DataParser(getApplicationContext());
         context=this.getApplicationContext();
         creater=new newTodo(getApplication(),parser);
+        catCreator=new newCatagory(getApplication(),parser,this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -78,11 +80,15 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
     @Override
     public void onNavigationDrawerItemSelected(int position)
     {
-        // update the main content by replacing fragments
+        /* update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+                */
+        if(position==3){
+            catCreator.showCat();
+        }
     }
 
     public void onSectionAttached(int number)
