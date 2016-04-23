@@ -103,7 +103,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     private void update()
     {
-        TodoAdapter adapter = new TodoAdapter(this, parser.getData());
+        TodoAdapter adapter = new TodoAdapter(this, parser.getData(), parser);
 
         events.setAdapter(adapter);
     }
