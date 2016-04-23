@@ -12,15 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.coleman.adapters.TodoAdapter;
-import com.example.coleman.app_code.Todo;
 import com.example.coleman.xml.DataParser;
-
-import java.util.ArrayList;
 
 public class Main extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
@@ -28,9 +23,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     private DataParser parser;
     private ListView events;
-    private newTodo creater;
+    private AddTodo creater;
     private Context context;
-    private newCatagory catCreator;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -50,10 +44,9 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        parser=new DataParser(getApplicationContext());
-        context=this.getApplicationContext();
-        creater=new newTodo(getApplication(),parser);
-        catCreator=new newCatagory(getApplication(),parser,this);
+        parser = new DataParser(this.getApplicationContext());
+        context = this.getApplicationContext();
+        creater = new AddTodo(parser, this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -71,24 +64,27 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
             @Override
             public void onClick(View v)
             {
-                // TODO: Add code here.
                 creater.showTodo();
             }
         });
     }
 
     @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        parser.saveData();
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position)
     {
-        /* update the main content by replacing fragments
+        // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
-                */
-        if(position==3){
-            catCreator.showCat();
-        }
     }
 
     public void onSectionAttached(int number)
@@ -113,11 +109,16 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         actionBar.setTitle(mTitle);
     }
 
-    private void update()
+    public void update()
     {
         TodoAdapter adapter = new TodoAdapter(this, parser.getData(), parser);
 
         events.setAdapter(adapter);
+    }
+
+    public DataParser getParser()
+    {
+        return parser;
     }
 
     /**

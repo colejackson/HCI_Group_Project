@@ -6,14 +6,19 @@ import android.util.Log;
 
 import com.example.coleman.app_code.Category;
 import com.example.coleman.app_code.Items;
+import com.example.coleman.app_code.Orderings;
 import com.example.coleman.app_code.Todo;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -23,6 +28,8 @@ public class DataParser
 {
     public static final int CATEGORY = 0;
     public static final int NOTE = 1;
+
+    private Orderings mode;
 
     private File file;
     private File dir;
@@ -34,7 +41,7 @@ public class DataParser
 
     public DataParser(Context context)
     {
-        boolean makeDir = false;
+        mode = Orderings.TIME_ASC;
 
         try
         {
@@ -46,9 +53,9 @@ public class DataParser
             Log.d("TODO","file is "+file.exists());
             reader = new XMLReader(file);
 
-            data=new ArrayList<Todo>();
+            data=new ArrayList<>();
             Log.d("TODO","data length "+data.size());
-            categories=new ArrayList<Category>();
+            categories=new ArrayList<>();
 
             parseData();
         }
@@ -61,55 +68,96 @@ public class DataParser
     public void parseData()
     {
         //first categories
-        reader.setTag("category");
+        reader.setTag("categories");
         reader.parse();
-        for(int i = 0; i < reader.getCapacity(); i++)
+        if(reader.getCapacity() > 0)
         {
-            Element tmp = (Element)reader.getNodeAt(i);
-            //get the child nodes here...
-            String name=tmp.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
-            int id=Integer.getInteger(tmp.getElementsByTagName("id").item(0).getFirstChild().getNodeValue());
-            int color=Integer.getInteger(tmp.getElementsByTagName("color").item(0).getFirstChild().getNodeValue());
+            Element tmp = (Element)reader.getNodeAt(0);
 
-            Category newCat=new Category(id,name,color);
-            categories.add(newCat);
+            NodeList list = tmp.getChildNodes();
+
+            for(int i = 0; i < list.getLength(); i++)
+            {
+                Node n = list.item(i);
+
+                NodeList values = n.getChildNodes();
+
+
+                //get the child nodes here...
+                String name = values.item(0).getFirstChild().getNodeValue();
+                int id = Integer.getInteger(values.item(1).getFirstChild().getNodeValue());
+                int color = Integer.getInteger(values.item(2).getFirstChild().getNodeValue());
+
+                Category newCat=new Category(id,name,color);
+                categories.add(newCat);
+            }
         }
 
         //then todos
-        reader.setTag("todo");
+        reader.setTag("todos");
         reader.parse();
-        for(int i = 0; i < reader.getCapacity(); i++)
+        if(reader.getCapacity() > 0)
         {
-            try {
-                Element tmp = (Element) reader.getNodeAt(i);
-                String name = tmp.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
-                String description = tmp.getElementsByTagName("description").item(0).getFirstChild().getNodeValue();
-                String raw = tmp.getElementsByTagName("date").item(0).getFirstChild().getNodeValue();
-                SimpleDateFormat sdf = new SimpleDateFormat();
-                Date date = sdf.parse(raw);
-                int categoryId=Integer.getInteger(tmp.getElementsByTagName("categoryId").item(0).getFirstChild().getNodeValue());
-                int id=Integer.getInteger(tmp.getElementsByTagName("id").item(0).getFirstChild().getNodeValue());
-                //get the child nodes here...
+            Element tmp = (Element) reader.getNodeAt(0);
 
-                Category category=null;
-                for(Category temp:categories){
-                    if(temp.getid()==categoryId){
-                        category=temp;
+            NodeList list = tmp.getChildNodes();
+
+            for (int i = 0; i < list.getLength(); i++)
+            {
+                Node n = list.item(i);
+
+                NodeList values = n.getChildNodes();
+
+                //get the child nodes here...
+                String name = values.item(0).getFirstChild().getNodeValue();
+                String description = values.item(1).getFirstChild().getNodeValue();
+                String raw = values.item(2).getFirstChild().getNodeValue();
+                SimpleDateFormat sdf = new SimpleDateFormat();
+
+                Date date = null;
+                try
+                {
+                    date = sdf.parse(raw);
+                }
+                catch(ParseException e)
+                {
+                    System.out.println("PARSE EXCEPTION: DATA PARSER: BAD DATE PARSE");
+                }
+
+                String cat = values.item(3).getFirstChild().getNodeValue();
+                int catid = ((cat.equals("null")) ? 0 : Integer.parseInt(cat));
+                String id_str = values.item(4).getFirstChild().getNodeValue();
+                int id = Integer.parseInt(id_str);
+
+                Category category = null;
+                for(Category c : categories)
+                {
+                    if(catid == c.getid())
+                    {
+                        category = c;
                     }
                 }
 
-                Todo todo = new Todo(name, description,date,category,id);
+                if(category == null)
+                    category = new Category(0, "DEFAULT", Color.BLUE);
+
+                Todo todo = new Todo(name, description, date, category, id);
                 data.add(todo);
-            }catch(Exception e){e.printStackTrace();}
+            }
         }
     }
 
-    private void saveData()
+    public void saveData()
     {
+        this.sort();
+
         try{
             file.delete();
-            out=new PrintWriter(file);
+
+            out = new PrintWriter(file);
             out.print("<base>");
+
+            out.print("<categories>");
 
             for(Category cat : categories)
             {
@@ -125,6 +173,10 @@ public class DataParser
                     out.print("</color>");
                 out.print("</category>");
             }
+
+            out.print("</categories>");
+
+            out.print("<todos>");
 
             for(Todo todo:data)
             {
@@ -147,6 +199,8 @@ public class DataParser
                     out.print("</id>");
                 out.print("</todo>");
             }
+
+            out.print("</todos>");
 
             out.println("</base>");
             out.flush();
@@ -246,6 +300,22 @@ public class DataParser
         saveData();
     }
 
+    public void sort()
+    {
+        Collections.sort(data, mode);
+        saveData();
+    }
+
+    public void shuffle()
+    {
+        Collections.shuffle(data);
+    }
+
+    public void setOrdering(Orderings o)
+    {
+        this.mode = o;
+    }
+
     private boolean checkID(int id, int mode)
     {
         ArrayList<? extends Items> stuff = ((mode == CATEGORY) ? categories : data);
@@ -253,9 +323,9 @@ public class DataParser
         for(Items i : stuff)
         {
             if(id == i.getid())
-                return false;
+                return true;
         }
 
-        return true;
+        return false;
     }
 }

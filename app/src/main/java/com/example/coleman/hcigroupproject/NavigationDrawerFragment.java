@@ -27,7 +27,8 @@ import android.widget.Toast;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment
+{
 
     /**
      * Remember the position of the selected item.
@@ -58,7 +59,8 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    public NavigationDrawerFragment() {
+    public NavigationDrawerFragment()
+    {
     }
 
     @Override
@@ -76,7 +78,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
+        //selectItem(mCurrentSelectedPosition);
     }
 
     @Override
@@ -102,10 +104,10 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                        "Add Catagory"
+                        "New Note...",
+                        "Add Category...",
+                        "Manage Categories",
+                        "Sort Notes",
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -189,7 +191,8 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-    private void selectItem(int position) {
+    private void selectItem(int position)
+    {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
@@ -199,6 +202,27 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+
+
+        switch(position)
+        {
+            case 0:
+                AddTodo creator1 = new AddTodo(((Main)this.getActivity()).getParser(), this.getActivity());
+                creator1.showTodo();
+                break;
+            case 1:
+                AddCatagory creator = new AddCatagory(this.getActivity());
+                creator.showTodo();
+                break;
+            case 2:
+                ManageCat creator2 = new ManageCat(this.getActivity());
+                creator2.showTodo();
+                break;
+            case 3:
+                SortTodo creator3 = new SortTodo(this.getActivity());
+                creator3.showTodo();
+                break;
         }
     }
 

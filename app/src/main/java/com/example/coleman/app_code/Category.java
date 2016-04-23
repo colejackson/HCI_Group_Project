@@ -10,12 +10,14 @@ public class Category implements Items
     private int id;
     private String name;
     private int color;
+    private boolean active;
 
     public Category(int id, String name, int color)
     {
         this.id = id;
         this.name = name;
         this.color = color;
+        this.active = true;
     }
 
     public int getid()
@@ -44,4 +46,14 @@ public class Category implements Items
     }
 
     public String toString(){return name;}
+
+    public boolean getActive()
+    {
+        return active;
+    }
+
+    public void setActive(boolean b)
+    {
+        this.active = b;
+    }
 }

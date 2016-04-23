@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/item"
@@ -9,7 +9,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/titlerow"
         android:gravity="right">
 
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="TODAY'S DATE HERE"
             android:id="@+id/datebutton"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:clickable="false" />
 
         <!--<DatePicker-->
@@ -39,14 +39,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expand"
-            android:layout_weight="2"
-            android:src="@drawable/ic_keyboard_arrow_up_24dp" />
+            android:layout_weight="1"
+            android:src="@drawable/ic_keyboard_arrow_down_24dp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/hiddenrow"
         android:layout_gravity="right">
 
@@ -62,14 +63,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:text="New Switch"
+            android:text="Due Date"
             android:id="@+id/usedate"
             android:layout_weight="5" />
     </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:maxLength="100"
