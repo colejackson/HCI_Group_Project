@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     private DataParser parser;
     private ListView events;
+    private newTodo creater;
+    private Context context;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -47,6 +50,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         setContentView(R.layout.activity_main);
 
         parser=new DataParser(this.getApplicationContext());
+        context=this.getApplicationContext();
+        creater=new newTodo(getApplication(),parser);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -65,6 +70,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
             public void onClick(View v)
             {
                 // TODO: Add code here.
+                creater.showTodo();
             }
         });
     }

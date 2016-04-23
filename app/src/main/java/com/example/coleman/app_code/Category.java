@@ -42,4 +42,6 @@ public class Category implements Items
     {
         this.color = color;
     }
+
+    public String toString(){return name;}
 }
