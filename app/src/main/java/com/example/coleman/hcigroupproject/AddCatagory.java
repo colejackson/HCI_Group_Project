@@ -2,12 +2,14 @@ package com.example.coleman.hcigroupproject;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.coleman.adapters.ColorAdapter;
+import com.example.coleman.app_code.Category;
 import com.example.coleman.app_code.CatColors;
 import com.example.coleman.xml.DataParser;
 
@@ -37,7 +39,7 @@ public class AddCatagory {
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.new_catagory);
-        dialog.setTitle("Create New Category");
+        dialog.setTitle("   Create New Category");
 
         name = (EditText) dialog.findViewById(R.id.catName);
         //fill data from some method passed from the main

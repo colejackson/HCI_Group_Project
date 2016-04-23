@@ -9,7 +9,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/titlerow"
         android:gravity="right">
 
@@ -41,39 +41,47 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/hiddenrow"
         android:layout_gravity="right">
 
-        <Spinner
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:id="@+id/category"
-            android:layout_weight="5" />
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_weight="5">
+            <Spinner
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/category"
+                android:layout_weight="5" />
 
-        <Switch
-            android:layout_width="wrap_content"
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="Due Date"
+                android:id="@+id/usedate"
+                android:layout_weight="5" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:text="Due Date"
-            android:id="@+id/usedate"
-            android:layout_weight="5" />
+            android:maxLength="100"
+            android:maxLines="3"
+            android:text="Notes about my Todo"
+            android:id="@+id/notes"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="5"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:maxLength="100"
-        android:maxLines="3"
-        android:text="Notes about my Todo"
-        android:id="@+id/notes"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 </LinearLayout>

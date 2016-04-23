@@ -10,7 +10,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
             <Uses-Permission  android:name = "Android.Permission.WRITE_EXTERNAL_STORAGE"  />
             <Uses-Permission  android:name = "Android.Permission.READ_EXTERNAL_STORAGE"  />
             <intent-filter>

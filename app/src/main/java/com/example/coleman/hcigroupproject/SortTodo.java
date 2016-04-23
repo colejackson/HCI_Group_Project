@@ -46,7 +46,7 @@ public class SortTodo
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.sort_todo);
-        dialog.setTitle("Sort Todo");
+        dialog.setTitle("             Sort Todo");
 
         group = (RadioGroup) dialog.findViewById(R.id.group);
 
