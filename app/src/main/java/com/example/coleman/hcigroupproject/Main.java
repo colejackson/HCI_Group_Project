@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.coleman.adapters.TodoAdapter;
 import com.example.coleman.app_code.Todo;
@@ -25,6 +28,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     private DataParser parser;
     private ListView events;
+    private newTodo creater;
+    private Context context;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -45,6 +50,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         setContentView(R.layout.activity_main);
 
         parser=new DataParser(this.getApplicationContext());
+        context=this.getApplicationContext();
+        creater=new newTodo(getApplication(),parser);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -55,6 +62,17 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         events = (ListView) findViewById(R.id.events);
 
         update();
+
+        FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
+        FAB.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO: Add code here.
+                creater.showTodo();
+            }
+        });
     }
 
     @Override
@@ -91,7 +109,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     private void update()
     {
-        TodoAdapter adapter = new TodoAdapter(this, parser.getData());
+        TodoAdapter adapter = new TodoAdapter(this, parser.getData(), parser);
 
         events.setAdapter(adapter);
     }

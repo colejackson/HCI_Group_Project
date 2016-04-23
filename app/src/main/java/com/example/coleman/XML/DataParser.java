@@ -2,7 +2,6 @@ package com.example.coleman.xml;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Environment;
 import android.util.Log;
 
 import com.example.coleman.app_code.Category;
@@ -39,14 +38,7 @@ public class DataParser
 
         try
         {
-            data = new ArrayList();
-            dir = new File(Environment.getExternalStorageDirectory() + "/HCI/data");
-            if(!dir.exists() || !dir.isDirectory())
-            {
-                makeDir = dir.mkdir();
-            }
-            Log.d("TODO","directory is "+dir.exists());
-            file = new File(dir, "todo.xml");
+            file = new File(context.getFilesDir(), "todo.xml");
             if(!file.exists())
             {
                 file.createNewFile();
@@ -55,6 +47,7 @@ public class DataParser
             reader = new XMLReader(file);
 
             data=new ArrayList<Todo>();
+            Log.d("TODO","data length "+data.size());
             categories=new ArrayList<Category>();
 
             parseData();
@@ -106,6 +99,7 @@ public class DataParser
                 }
 
                 Todo todo = new Todo(name, description,date,category,id);
+                data.add(todo);
             }catch(Exception e){e.printStackTrace();}
         }
     }
@@ -116,8 +110,6 @@ public class DataParser
             file.delete();
             out=new PrintWriter(file);
             out.print("<base>");
-
-            out.print("<categories>");
 
             for(Category cat : categories)
             {
@@ -133,8 +125,6 @@ public class DataParser
                     out.print("</color>");
                 out.print("</category>");
             }
-
-            out.print("</categories>");
 
             for(Todo todo:data)
             {
@@ -176,7 +166,9 @@ public class DataParser
     {
         return data.toArray(new Todo[data.size()]);
     }
-    
+
+    public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}
+
     public void addNote(String name, int category, Date date, String note)
     {
         int id;

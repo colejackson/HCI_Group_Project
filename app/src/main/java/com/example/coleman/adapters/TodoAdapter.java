@@ -1,7 +1,9 @@
 package com.example.coleman.adapters;
 
 import android.app.Activity;
+import android.gesture.GestureOverlayView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 
 import com.example.coleman.app_code.Todo;
 import com.example.coleman.hcigroupproject.R;
+import com.example.coleman.xml.DataParser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,16 +32,18 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 {
     private final Activity context;
     private final Todo[] events;
+    private final DataParser dp;
 
     Boolean expanded = false;
 
-
-    public TodoAdapter(Activity context, Todo[] events)
+    
+    public TodoAdapter(Activity context, Todo[] events, DataParser dp)
     {
         super(context, R.layout.todo_item, events);
 
         this.context = context;
         this.events = events;
+        this.dp = dp;
     }
 
     public View getView(int position,View view, ViewGroup parent)
@@ -55,6 +60,10 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.todo_item, null, true);
+
+        OnSwipeTouchListener ostl = new OnSwipeTouchListener(context, dp, events[position]);
+
+        rowView.setOnTouchListener(ostl);
 
         final LinearLayout hiddenrow = (LinearLayout) context.findViewById(R.id.hiddenrow);
         final TextView notes = (TextView) context.findViewById(R.id.notes);
