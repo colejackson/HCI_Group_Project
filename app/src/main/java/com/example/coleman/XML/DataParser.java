@@ -76,6 +76,11 @@ public class DataParser
 
             NodeList list = tmp.getChildNodes();
 
+            if(list.getLength() == 0)
+            {
+                categories.add(new Category(0, "DEFAULT", Color.BLUE));
+            }
+
             for(int i = 0; i < list.getLength(); i++)
             {
                 Node n = list.item(i);
