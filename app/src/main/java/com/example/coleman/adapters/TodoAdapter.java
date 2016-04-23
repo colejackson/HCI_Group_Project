@@ -17,7 +17,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import com.example.coleman.app_code.Category;
 import com.example.coleman.app_code.Todo;
+import com.example.coleman.hcigroupproject.Main;
 import com.example.coleman.hcigroupproject.R;
 import com.example.coleman.hcigroupproject.SetDate;
 import com.example.coleman.xml.DataParser;
@@ -82,6 +84,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         hiddenrow.setVisibility(View.GONE);
         notes.setVisibility(View.GONE);
 
+        category.setAdapter(new CatagoryAdapter(this.context, dp.getCategory()));
+
         dateButton.setText(t.getDate());
 
         notes.setText(events[position].getNote());
@@ -108,6 +112,12 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                 else
                 {
                     expanded = true;
+
+                    t.setName(name.getText().toString());
+                    t.setCategory((Category) category.getSelectedItem());
+                    t.setNote(notes.getText().toString());
+
+                    dp.updateNote(t);
 
                     hiddenrow.setVisibility(View.VISIBLE);
                     notes.setVisibility(View.VISIBLE);
