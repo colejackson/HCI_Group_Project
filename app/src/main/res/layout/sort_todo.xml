@@ -10,35 +10,29 @@
         android:id="@+id/group"
         android:gravity="top">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Chron. Ascending"
+            android:id="@+id/ca" />
 
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Chron. Ascending"
-                android:id="@+id/ca" />
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Chron. Descending"
+            android:id="@+id/cd" />
 
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Chron. Descending"
-                android:id="@+id/cd" />
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="By Catagory"
+            android:id="@+id/bc" />
 
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="By Catagory"
-                android:id="@+id/bc" />
-
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Random"
-                android:id="@+id/ran" />
-        </LinearLayout>
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Random"
+            android:id="@+id/ran" />
     </RadioGroup>
 
     <LinearLayout
