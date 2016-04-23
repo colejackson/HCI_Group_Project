@@ -51,7 +51,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
         parser=new DataParser(this.getApplicationContext());
         context=this.getApplicationContext();
-        creater=new newTodo(getApplication(),parser);
+        creater=new newTodo(getApplication(),parser,this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -107,7 +107,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         actionBar.setTitle(mTitle);
     }
 
-    private void update()
+    public void update()
     {
         TodoAdapter adapter = new TodoAdapter(this, parser.getData(), parser);
 

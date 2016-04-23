@@ -47,7 +47,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         this.dp = dp;
     }
 
-    public View getView(int position,View view, ViewGroup parent)
+    public View getView(int position, View view, ViewGroup parent)
     {
         Date d = null;
         try
@@ -59,34 +59,30 @@ public class TodoAdapter extends ArrayAdapter<Todo>
             System.out.println("Messed Up Date Format!!!!");
         }
 
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.todo_item, null, true);
+        if (view == null)
+        {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.todo_item, parent, false);
+        }
 
         OnSwipeTouchListener ostl = new OnSwipeTouchListener(context, dp, events[position]);
 
-        rowView.setOnTouchListener(ostl);
+        view.setOnTouchListener(ostl);
 
-        final LinearLayout hiddenrow = (LinearLayout) context.findViewById(R.id.hiddenrow);
-        final TextView notes = (TextView) context.findViewById(R.id.notes);
-        final EditText name = (EditText) context.findViewById(R.id.name);
-        //final DatePicker datePicker = (DatePicker) context.findViewById(R.id.date);
-        final Button dateButton = (Button) context.findViewById(R.id.datebutton);
-        final Spinner category = (Spinner) context.findViewById(R.id.category);
-        final Switch usedate = (Switch) context.findViewById(R.id.usedate);
-        final ImageButton expand = (ImageButton) context.findViewById(R.id.expand);
-
-
-
+        final LinearLayout hiddenrow = (LinearLayout) view.findViewById(R.id.hiddenrow);
+        final TextView notes = (TextView) view.findViewById(R.id.notes);
+        final EditText name = (EditText) view.findViewById(R.id.name);
+//        DatePicker date = (DatePicker) context.findViewById(R.id.date);
+        final Button dateButton = (Button) view.findViewById(R.id.datebutton);
+        final Spinner category = (Spinner) view.findViewById(R.id.category);
+        final Switch usedate = (Switch) view.findViewById(R.id.usedate);
+        final ImageButton expand = (ImageButton) view.findViewById(R.id.expand);
+        
         hiddenrow.setVisibility(View.INVISIBLE);
         notes.setVisibility(View.INVISIBLE);
         //datePicker.setVisibility(View.INVISIBLE);
 
-
-
         notes.setText(events[position].getNote());
         name.setText(events[position].getName());
-
-
 
         expand.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -133,6 +129,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
+                //DatePicker datePicker = new DatePicker();
 
                 //TODO for this action listener...
                 //only execute if switch is "on"
@@ -165,6 +162,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         });
 
 
-        return rowView;
+        return view;
     }
 }
