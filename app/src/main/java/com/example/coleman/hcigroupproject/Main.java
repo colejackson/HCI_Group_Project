@@ -6,12 +6,14 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.coleman.adapters.TodoAdapter;
 import com.example.coleman.app_code.Todo;
@@ -55,6 +57,16 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         events = (ListView) findViewById(R.id.events);
 
         update();
+
+        FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
+        FAB.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO: Add code here.
+            }
+        });
     }
 
     @Override
