@@ -14,13 +14,14 @@
         android:gravity="right">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
             android:text="TODO NAME"
             android:id="@+id/name"
-            android:layout_weight="5" />
+            android:layout_weight="5"
+            android:minWidth="200dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -30,17 +31,12 @@
             android:layout_weight="2"
             android:clickable="false" />
 
-        <!--<DatePicker-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/date" />-->
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expand"
             android:layout_weight="1"
-            android:src="@drawable/ic_keyboard_arrow_down_24dp" />
+            android:background="@drawable/ic_keyboard_arrow_up_24dp"/>
 
     </LinearLayout>
 

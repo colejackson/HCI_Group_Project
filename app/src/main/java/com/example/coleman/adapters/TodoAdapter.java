@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import com.example.coleman.app_code.Todo;
 import com.example.coleman.hcigroupproject.R;
+import com.example.coleman.hcigroupproject.SetDate;
 import com.example.coleman.xml.DataParser;
 
 import java.text.ParseException;
@@ -49,6 +50,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
     public View getView(int position, View view, ViewGroup parent)
     {
+        final Todo t = events[position];
+
         Date d = null;
         try
         {
@@ -71,7 +74,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final LinearLayout hiddenrow = (LinearLayout) view.findViewById(R.id.hiddenrow);
         final TextView notes = (TextView) view.findViewById(R.id.notes);
         final EditText name = (EditText) view.findViewById(R.id.name);
-//        DatePicker date = (DatePicker) context.findViewById(R.id.date);
         final Button dateButton = (Button) view.findViewById(R.id.datebutton);
         final Spinner category = (Spinner) view.findViewById(R.id.category);
         final Switch usedate = (Switch) view.findViewById(R.id.usedate);
@@ -79,7 +81,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         
         hiddenrow.setVisibility(View.GONE);
         notes.setVisibility(View.GONE);
-        //datePicker.setVisibility(View.INVISIBLE);
+
+        dateButton.setText(t.getDate());
 
         notes.setText(events[position].getNote());
         name.setText(events[position].getName());
@@ -139,30 +142,10 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
                 //TODO for this action listener...
                 //only execute if switch is "on"
-                if (isOn) {
-                    //this action listener opens dialog box with "date picker" layout
-                    //receives date fields (date, month, year) from date picker
-                    //sets text of "dateButton" to the date received from datePicker
-
-
-//              OLD code ... can probably use this elsewhere
-//                    Boolean datePicked = false;
-//                    datePicker.setVisibility(View.VISIBLE);
-//                    dateButton.setVisibility(View.INVISIBLE);
-//                    Date date = new Date();
-//
-//                    date.setMonth(datePicker.getMonth());
-//                    date.setDate(datePicker.getDayOfMonth());
-//                    date.setYear(datePicker.getYear());
-//                    dateButton.setText(date.toString());
-//                    datePicked = true;
-//
-//                    if (datePicked) {
-//                        datePicker.setVisibility(View.INVISIBLE);
-//                        dateButton.setVisibility(View.VISIBLE);
-//
-//                    }
-
+                if (isOn)
+                {
+                    SetDate creator = new SetDate(context, t);
+                    creator.showTodo();
                 }
             }
         });

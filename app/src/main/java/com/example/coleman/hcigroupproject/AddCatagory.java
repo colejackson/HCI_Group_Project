@@ -8,7 +8,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.coleman.adapters.ColorAdapter;
+import com.example.coleman.app_code.CatColors;
 import com.example.coleman.xml.DataParser;
+
+import java.util.ArrayList;
 
 /**
  * Created by sirkellsworth on 4/22/16.
@@ -39,7 +42,12 @@ public class AddCatagory {
         name = (EditText) dialog.findViewById(R.id.catName);
         //fill data from some method passed from the main
         color = (Spinner) dialog.findViewById(R.id.colorSpinner);
-        color.setAdapter(new ColorAdapter(parent, new Integer[]{}));
+
+        ArrayList<Integer> colors = new ArrayList();
+        for(CatColors c : CatColors.values())
+            colors.add(c.id);
+
+        color.setAdapter(new ColorAdapter(parent, colors.toArray(new Integer[colors.size()])));
 
         cancel = (Button) dialog.findViewById(R.id.catCancel);
         finish = (Button) dialog.findViewById(R.id.catOK);
@@ -59,7 +67,7 @@ public class AddCatagory {
                     nameText = name.getText().toString();
                     //int selected=color.getSelectedItemPosition();
 
-                    parser.addCat(nameText);
+                    parser.addCat(nameText, Integer.parseInt(color.getSelectedItem().toString()));
                 }catch(Exception e){e.printStackTrace();}
 
                 dialog.dismiss();

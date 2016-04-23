@@ -76,11 +76,6 @@ public class DataParser
 
             NodeList list = tmp.getChildNodes();
 
-            if(list.getLength() == 0)
-            {
-                categories.add(new Category(0, "DEFAULT", Color.BLUE));
-            }
-
             for(int i = 0; i < list.getLength(); i++)
             {
                 Node n = list.item(i);
@@ -96,6 +91,11 @@ public class DataParser
                 Category newCat=new Category(id,name,color);
                 categories.add(newCat);
             }
+        }
+
+        if(categories.size() == 0)
+        {
+            categories.add(new Category(0, "DEFAULT", Color.BLUE));
         }
 
         //then todos
@@ -249,14 +249,12 @@ public class DataParser
         saveData();
     }
 
-    public void addCat(String name)
+    public void addCat(String name, int color)
     {
         int id;
-        int color;
         do
         {
             id = (int)(Math.random()*10000);
-            color = Color.argb(255, 44, 44, 240);
         }
         while(checkID(id, CATEGORY));
 
@@ -308,7 +306,6 @@ public class DataParser
     public void sort()
     {
         Collections.sort(data, mode);
-        saveData();
     }
 
     public void shuffle()
