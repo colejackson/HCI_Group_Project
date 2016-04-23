@@ -167,6 +167,8 @@ public class DataParser
         return data.toArray(new Todo[data.size()]);
     }
 
+    public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}
+
     public void addNote(String name, int category, Date date, String note)
     {
         int id;
