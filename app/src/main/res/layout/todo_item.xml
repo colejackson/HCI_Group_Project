@@ -1,55 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/item">
+    android:id="@+id/item"
+    android:gravity="bottom">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/titlerow">
+        android:layout_height="wrap_content"
+        android:id="@+id/titlerow"
+        android:gravity="right">
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/name" />
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="TODO NAME"
+            android:id="@+id/name"
+            android:layout_weight="5" />
 
-        <DatePicker
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/date" />
+            android:text="TODAY'S DATE HERE"
+            android:id="@+id/datebutton"
+            android:layout_weight="3"
+            android:clickable="false" />
+
+        <!--<DatePicker-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/date" />-->
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/expand" />
+            android:id="@+id/expand"
+            android:layout_weight="2"
+            android:src="@drawable/ic_keyboard_arrow_down_24dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/hiddenrow">
+        android:id="@+id/hiddenrow"
+        android:layout_gravity="right">
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/category" />
+            android:layout_margin="10dp"
+            android:id="@+id/category"
+            android:layout_weight="5" />
 
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
             android:text="New Switch"
-            android:id="@+id/usedate" />
+            android:id="@+id/usedate"
+            android:layout_weight="5" />
     </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:maxLength="100"
+        android:maxLines="3"
+        android:text="Notes about my Todo"
         android:id="@+id/notes"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
