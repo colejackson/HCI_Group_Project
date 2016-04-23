@@ -308,7 +308,6 @@ public class DataParser
     public void sort()
     {
         Collections.sort(data, mode);
-        saveData();
     }
 
     public void shuffle()

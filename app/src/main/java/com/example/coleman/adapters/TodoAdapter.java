@@ -47,7 +47,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         this.dp = dp;
     }
 
-    public View getView(int position, View view, ViewGroup parent)
+    public View getView(int position, View view, final ViewGroup parent)
     {
         Date d = null;
         try
@@ -93,6 +93,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     hiddenrow.setVisibility(View.GONE);
                     notes.setVisibility(View.GONE);
 
+                    expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to UNEDITABLE
                     name.setEnabled(false);
@@ -109,6 +110,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     hiddenrow.setVisibility(View.VISIBLE);
                     notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
+                    expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to EDITABLE
                     name.setEnabled(true);
@@ -116,6 +118,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     dateButton.setClickable(true);
 
                 }
+                ((View)((View)((View)v.getParent()).getParent()).getParent()).invalidate();
+                ((View)((View)((View)v.getParent()).getParent()).getParent()).refreshDrawableState();
             }
         });
 

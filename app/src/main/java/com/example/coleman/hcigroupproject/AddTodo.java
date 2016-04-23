@@ -5,6 +5,7 @@ import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,21 +48,20 @@ public class AddTodo {
     public void showTodo(){
         dialog=new Dialog(a);
         dialog.setContentView(R.layout.new_todo);
-        dialog.setTitle("Create New Note");
+        dialog.setTitle("       Create New Note");
 
         name=(EditText)dialog.findViewById(R.id.name);
         description=(EditText)dialog.findViewById(R.id.description);
         //fill data from some method passed from the main
         category=(Spinner)dialog.findViewById(R.id.category);
 
-        Category[] ca = null;
-        if(parser.getCategory() == null)
+        Category[] ca = parser.getCategory();
+        Log.d("TODO","LENGTH OF CA: "+ca.length);
+        if(ca.length == 0)
         {
             ca = new Category[1];
             ca[0] =  new Category(0, "Default", Color.BLUE);
         }
-        else
-            ca = parser.getCategory();
 
 
         category.setAdapter(new CatagoryAdapter(a, ca));
