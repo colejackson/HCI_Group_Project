@@ -2,7 +2,6 @@ package com.example.coleman.xml;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Environment;
 import android.util.Log;
 
 import com.example.coleman.app_code.Category;
@@ -112,8 +111,6 @@ public class DataParser
             out=new PrintWriter(file);
             out.print("<base>");
 
-            out.print("<categories>");
-
             for(Category cat : categories)
             {
                 out.print("<category>");
@@ -128,8 +125,6 @@ public class DataParser
                     out.print("</color>");
                 out.print("</category>");
             }
-
-            out.print("</categories>");
 
             for(Todo todo:data)
             {

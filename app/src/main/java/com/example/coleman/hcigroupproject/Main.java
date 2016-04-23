@@ -77,7 +77,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
                 mTitle = getString(R.string.title_section2);
                 break;
             case 3:
-                mTitle = "test string";
+                mTitle = getString(R.string.title_section3);
                 break;
         }
     }
