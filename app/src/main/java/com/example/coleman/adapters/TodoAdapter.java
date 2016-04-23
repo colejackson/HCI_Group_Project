@@ -77,8 +77,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final Switch usedate = (Switch) view.findViewById(R.id.usedate);
         final ImageButton expand = (ImageButton) view.findViewById(R.id.expand);
         
-        hiddenrow.setVisibility(View.INVISIBLE);
-        notes.setVisibility(View.INVISIBLE);
+        hiddenrow.setVisibility(View.GONE);
+        notes.setVisibility(View.GONE);
         //datePicker.setVisibility(View.INVISIBLE);
 
         notes.setText(events[position].getNote());
@@ -90,6 +90,9 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     expanded = false;
                     //reset button image (pointing up)
 
+                    hiddenrow.setVisibility(View.GONE);
+                    notes.setVisibility(View.GONE);
+
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to UNEDITABLE
                     name.setEnabled(false);
@@ -98,7 +101,10 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
                     //SAVE ALL INPUT
 
-                } else {
+                }
+                else
+                {
+                    expanded = true;
 
                     hiddenrow.setVisibility(View.VISIBLE);
                     notes.setVisibility(View.VISIBLE);

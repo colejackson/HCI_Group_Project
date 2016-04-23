@@ -25,7 +25,7 @@ import java.util.Date;
 /**
  * Created by sirkellsworth on 4/22/16.
  */
-public class newTodo{
+public class AddTodo {
 
     EditText name;
     EditText description;
@@ -38,9 +38,8 @@ public class newTodo{
     DataParser parser;
     final Activity a;
 
-    public newTodo(Application app, DataParser parser, Activity a)
+    public AddTodo(DataParser parser, Activity a)
     {
-        this.app=app;
         this.parser=parser;
         this.a = a;
     }

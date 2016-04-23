@@ -1,53 +1,48 @@
 package com.example.coleman.hcigroupproject;
 
-import android.app.Application;
+import android.app.Activity;
 import android.app.Dialog;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.coleman.adapters.CatagoryAdapter;
 import com.example.coleman.adapters.ColorAdapter;
 import com.example.coleman.xml.DataParser;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by sirkellsworth on 4/22/16.
  */
-public class newCatagory {
+public class AddCatagory {
 
     EditText name;
-    Spinner color;
     Button cancel;
     Button finish;
     Dialog dialog;
-    Application app;
+    Spinner color;
+
+    Activity parent;
     DataParser parser;
 
-    public newCatagory(Application app, DataParser parser){
-        this.app=app;
-        this.parser=parser;
+    public AddCatagory(Activity parent)
+    {
+        this.parser = ((Main)parent).getParser();
+        this.parent = parent;
     }
 
-    public void showTodo(){
-        dialog=new Dialog(app);
-        dialog.setContentView(R.layout.new_todo);
-        dialog.setTitle("Create New Catagory");
+    public void showTodo()
+    {
+        dialog = new Dialog(parent);
+        dialog.setContentView(R.layout.new_catagory);
+        dialog.setTitle("Create New Category");
 
-        name=(EditText)dialog.findViewById(R.id.name);
+        name = (EditText) dialog.findViewById(R.id.catName);
         //fill data from some method passed from the main
-        color=(Spinner)dialog.findViewById(R.id.color);
-        color.setAdapter(new ColorAdapter(dialog.getOwnerActivity(),new Integer[]{}));
+        color = (Spinner) dialog.findViewById(R.id.colorSpinner);
+        color.setAdapter(new ColorAdapter(parent, new Integer[]{}));
 
-
-
-        cancel=(Button)dialog.findViewById(R.id.cancel);
-        finish=(Button)dialog.findViewById(R.id.submit);
-
+        cancel = (Button) dialog.findViewById(R.id.catCancel);
+        finish = (Button) dialog.findViewById(R.id.catOK);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,15 +53,18 @@ public class newCatagory {
         finish.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                String nameText = "";
                 try {
                     //check to see if all fields are used
-                    String nameText = name.getText().toString();
-                    int selected=color.getSelectedItemPosition();
+                    nameText = name.getText().toString();
+                    //int selected=color.getSelectedItemPosition();
 
                     parser.addCat(nameText);
                 }catch(Exception e){e.printStackTrace();}
 
                 dialog.dismiss();
+
+                ((Main)parent).update();
             }
         });
 

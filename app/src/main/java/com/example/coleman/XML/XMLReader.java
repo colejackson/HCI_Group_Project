@@ -25,31 +25,48 @@ public class XMLReader
     private static int index=0;
     private boolean empty=true;
 
-    public XMLReader(File file){
-        try{
-            file=File.createTempFile(("tmp"+index), ".data");
+    public XMLReader(File file)
+    {
+        try
+        {
+            in = new FileInputStream(file);
+
+            file = File.createTempFile(("tmp"+index), ".data");
+
             index++;
-            in=new FileInputStream(file);
-            FileOutputStream out=new FileOutputStream(file);
-            while(in.available()!=0){
+
+            FileOutputStream out = new FileOutputStream(file);
+
+            while(in.available() != 0)
+            {
                 out.write(in.read());
                 empty=false;
             }
-            DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
-            DocumentBuilder db=dbf.newDocumentBuilder();
-            if(!empty) {
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            if(!empty)
+            {
                 document = db.parse(file);
             }
 
-        }catch(Exception e){e.printStackTrace();}
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty()
+    {
         return empty;
     }
 
-    public XMLReader(InputStream tmp){
-        try {
+    public XMLReader(InputStream tmp)
+    {
+        try
+        {
             in = tmp;
             file = File.createTempFile(("tmp"+index), ".data");
             index++;
@@ -63,20 +80,27 @@ public class XMLReader
         }catch(Exception e){e.printStackTrace();}
     }
 
-    public void setTag(String tag){
-        this.tag=tag;
+    public void setTag(String tag)
+    {
+        this.tag = tag;
     }
 
-    public void parse(){
-        Element element=document.getDocumentElement();
-        list=element.getElementsByTagName(tag);
+    public void parse()
+    {
+        if(empty)
+            return;
+
+        Element element = document.getDocumentElement();
+        list = element.getElementsByTagName(tag);
     }
 
-    public Node getNodeAt(int index){
+    public Node getNodeAt(int index)
+    {
         return list.item(index);
     }
 
-    public int getCapacity(){
+    public int getCapacity()
+    {
         return list.getLength();
     }
 }
