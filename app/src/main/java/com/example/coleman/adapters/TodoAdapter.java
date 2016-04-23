@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -35,7 +36,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
     private final DataParser dp;
 
     Boolean expanded = false;
-
+    Boolean isOn = false;
     
     public TodoAdapter(Activity context, Todo[] events, DataParser dp)
     {
@@ -68,22 +69,23 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final LinearLayout hiddenrow = (LinearLayout) context.findViewById(R.id.hiddenrow);
         final TextView notes = (TextView) context.findViewById(R.id.notes);
         final EditText name = (EditText) context.findViewById(R.id.name);
-//        DatePicker date = (DatePicker) context.findViewById(R.id.date);
+        //final DatePicker datePicker = (DatePicker) context.findViewById(R.id.date);
         final Button dateButton = (Button) context.findViewById(R.id.datebutton);
         final Spinner category = (Spinner) context.findViewById(R.id.category);
         final Switch usedate = (Switch) context.findViewById(R.id.usedate);
         final ImageButton expand = (ImageButton) context.findViewById(R.id.expand);
 
 
+
         hiddenrow.setVisibility(View.INVISIBLE);
         notes.setVisibility(View.INVISIBLE);
+        //datePicker.setVisibility(View.INVISIBLE);
 
 
 
         notes.setText(events[position].getNote());
         name.setText(events[position].getName());
-//        date.updateDate(d.getYear(), d.getMonth(), d.getDay());
-//        dateButton.set
+
 
 
         expand.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +99,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     name.setEnabled(false);
                     dateButton.setEnabled(false);
                     dateButton.setClickable(false);
+
+                    //SAVE ALL INPUT
 
                 } else {
 
@@ -113,10 +117,50 @@ public class TodoAdapter extends ArrayAdapter<Todo>
             }
         });
 
+        usedate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //We should test this... *not sure if default is "off" or "on"
+
+                if (isOn) {
+                    isOn = false;
+                } else {
+                    isOn = true;
+                }
+
+            }
+        });
+        
+
         dateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
-                //DatePicker datePicker = new DatePicker();
 
+                //TODO for this action listener...
+                //only execute if switch is "on"
+                if (isOn) {
+                    //this action listener opens dialog box with "date picker" layout
+                    //receives date fields (date, month, year) from date picker
+                    //sets text of "dateButton" to the date received from datePicker
+
+
+//              OLD code ... can probably use this elsewhere
+//                    Boolean datePicked = false;
+//                    datePicker.setVisibility(View.VISIBLE);
+//                    dateButton.setVisibility(View.INVISIBLE);
+//                    Date date = new Date();
+//
+//                    date.setMonth(datePicker.getMonth());
+//                    date.setDate(datePicker.getDayOfMonth());
+//                    date.setYear(datePicker.getYear());
+//                    dateButton.setText(date.toString());
+//                    datePicked = true;
+//
+//                    if (datePicked) {
+//                        datePicker.setVisibility(View.INVISIBLE);
+//                        dateButton.setVisibility(View.VISIBLE);
+//
+//                    }
+
+                }
             }
         });
 
