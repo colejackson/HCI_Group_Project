@@ -133,6 +133,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     //set name and date to EDITABLE
 
                     dateButton.setClickable(true);
+                    notes.setEnabled(true);
+                    notes.setFocusable(true);
 
 
                     dateButton.setClickable(true);

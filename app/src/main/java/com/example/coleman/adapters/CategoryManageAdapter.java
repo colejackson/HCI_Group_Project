@@ -60,17 +60,11 @@ public class CategoryManageAdapter extends ArrayAdapter<Category>
 
         activeBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("TODO","ACTIVE BOX VALUE CHANGED");
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 target.setActive(isChecked);
-                if(isChecked){
-                    dp.addFilter(target);
-                }else{
-                    dp.removeFilter(target);
-                }
             }
         });
-        dp.addFilter(target);
 
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

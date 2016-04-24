@@ -238,14 +238,6 @@ public class DataParser
         return temp.toArray(new Todo[temp.size()]);
     }
 
-    public void addFilter(Category filter){
-        filters.add(filter);
-    }
-
-    public void removeFilter(Category filter){
-        filters.remove(filter);
-    }
-
     public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}
 
     public void addNote(String name, int category, Date date, String note)
