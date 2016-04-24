@@ -3,7 +3,11 @@ package com.example.coleman.hcigroupproject;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -39,17 +43,13 @@ public class AddCatagory {
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.new_catagory);
-        dialog.setTitle("   Create New Category");
+        dialog.setTitle("Create New Category");
 
         name = (EditText) dialog.findViewById(R.id.catName);
         //fill data from some method passed from the main
         color = (Spinner) dialog.findViewById(R.id.colorSpinner);
 
-        ArrayList<Integer> colors = new ArrayList();
-        for(CatColors c : CatColors.values())
-            colors.add(c.id);
-
-        color.setAdapter(new ColorAdapter(parent, colors.toArray(new Integer[colors.size()])));
+        color.setAdapter(new ColorAdapter(parent));
 
         cancel = (Button) dialog.findViewById(R.id.catCancel);
         finish = (Button) dialog.findViewById(R.id.catOK);
@@ -64,13 +64,18 @@ public class AddCatagory {
             @Override
             public void onClick(View v){
                 String nameText = "";
-                try {
+                try
+                {
                     //check to see if all fields are used
                     nameText = name.getText().toString();
                     //int selected=color.getSelectedItemPosition();
 
-                    parser.addCat(nameText, Integer.parseInt(color.getSelectedItem().toString()));
-                }catch(Exception e){e.printStackTrace();}
+                    parser.addCat(nameText, ((CatColors)color.getSelectedItem()).id);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
 
                 dialog.dismiss();
 

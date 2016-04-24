@@ -14,14 +14,16 @@
         android:gravity="right">
 
         <EditText
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
             android:text="TODO NAME"
             android:id="@+id/name"
-            android:layout_weight="5"
-            android:minWidth="200dp" />
+            android:layout_weight="6"
+            android:maxLines="1"
+            android:maxLength="35"
+            android:singleLine="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -29,14 +31,18 @@
             android:text="TODAY'S DATE HERE"
             android:id="@+id/datebutton"
             android:layout_weight="2"
-            android:clickable="false" />
+            android:clickable="false"
+            android:layout_marginTop="17px" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expand"
-            android:layout_weight="1"
-            android:background="@drawable/ic_keyboard_arrow_up_24dp"/>
+            android:layout_weight="2"
+            android:minHeight="24dp"
+            android:background="@drawable/ic_keyboard_arrow_up_24dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="15px" />
 
     </LinearLayout>
 
@@ -75,13 +81,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:maxLength="100"
+            android:maxLength="300"
             android:maxLines="3"
             android:text="Notes about my Todo"
             android:id="@+id/notes"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="5"/>
+            android:layout_weight="5"
+            android:longClickable="false"
+            android:editable="true" />
     </LinearLayout>
 </LinearLayout>

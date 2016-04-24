@@ -20,14 +20,20 @@
             android:textColor="@color/white"
             android:id="@+id/nameText"
             android:layout_weight="1"
+            android:maxLines="1"
+            android:maxLength="35"
             android:textSize="20dp"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/name"
             android:layout_weight="1"
             android:lines="1"
-            android:maxHeight="24dp" />
+            android:maxHeight="24dp"
+            android:maxLines="1"
+            android:maxLength="35"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -50,7 +56,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/category"
             android:spinnerMode="dropdown"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -70,7 +77,10 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/description" />
+            android:id="@+id/description"
+            android:maxLines="3"
+            android:maxLength="300"
+            android:inputType="textMultiLine" />
 
         </LinearLayout>
 
@@ -84,14 +94,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:textColor="@color/white"
             android:id="@+id/cancel"
             android:layout_weight="0.50" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:textColor="@color/white"
             android:id="@+id/submit"
             android:layout_weight="0.50" />
 

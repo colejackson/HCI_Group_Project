@@ -60,22 +60,16 @@ public class CategoryManageAdapter extends ArrayAdapter<Category>
 
         activeBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("TODO","ACTIVE BOX VALUE CHANGED");
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 target.setActive(isChecked);
-                if(isChecked){
-                    dp.addFilter(target);
-                }else{
-                    dp.removeFilter(target);
-                }
             }
         });
-        dp.addFilter(target);
 
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                target.setColor(Integer.parseInt(cat_spin.getSelectedItem().toString()));
+                target.setColor(((CatColors)cat_spin.getSelectedItem()).id);
             }
 
             @Override
@@ -96,17 +90,13 @@ public class CategoryManageAdapter extends ArrayAdapter<Category>
         activeBox.setChecked(cats[position].getActive());
         cat_name.setText(cats[position].getName());
 
-        ArrayList<Integer> colors = new ArrayList();
-        for(CatColors c : CatColors.values())
-            colors.add(c.id);
-
-        cat_spin.setAdapter(new ColorAdapter(this.parent, colors.toArray(new Integer[colors.size()])));
+        cat_spin.setAdapter(new ColorAdapter(this.parent));
 
         for(int i = 0; i < cat_spin.getCount(); i++)
         {
             cat_spin.setSelection(i);
 
-            int j = Integer.parseInt(cat_spin.getSelectedItem().toString());
+            int j = ((CatColors)cat_spin.getSelectedItem()).id;
             int k = target.getColor();
 
             if(j == k)

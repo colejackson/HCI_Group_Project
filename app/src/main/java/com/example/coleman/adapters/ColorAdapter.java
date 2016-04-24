@@ -14,29 +14,30 @@ import com.example.coleman.hcigroupproject.R;
 /**
  * Created by sirkellsworth on 4/22/16.
  */
-public class ColorAdapter extends ArrayAdapter<Integer>{
+public class ColorAdapter extends ArrayAdapter<CatColors>{
 
     Activity context;
     Integer[] colors;
 
-    public ColorAdapter(Activity context, Integer[] ia){
-        super(context, R.layout.new_color, ia);
+    public ColorAdapter(Activity context){
+        super(context, R.layout.new_color, CatColors.values());
 
         this.context = context;
-        this.colors = ia;
     }
 
     public View getView(int position, View view, ViewGroup parent)
     {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.catagory_layout, null, true);
+        if (view == null)
+        {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.catagory_layout, parent, false);
+        }
 
-        TextView name = (TextView) rowView.findViewById(R.id.category_name);
-        name.setBackgroundColor(colors[position]);
+        TextView name = (TextView) view.findViewById(R.id.category_name);
+        name.setBackgroundColor(CatColors.values()[position].id);
         name.setWidth(30);
         name.setHeight(40);
         name.setText("");
 
-        return rowView;
+        return view;
     }
 }

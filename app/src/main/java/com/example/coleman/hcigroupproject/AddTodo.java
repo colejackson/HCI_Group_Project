@@ -48,7 +48,7 @@ public class AddTodo {
     public void showTodo(){
         dialog=new Dialog(a);
         dialog.setContentView(R.layout.new_todo);
-        dialog.setTitle("       Create New Note");
+        dialog.setTitle("Create New Todo");
 
         name=(EditText)dialog.findViewById(R.id.name);
         description=(EditText)dialog.findViewById(R.id.description);
@@ -82,25 +82,20 @@ public class AddTodo {
             @Override
             public void onClick(View v)
             {
-                try {
+                try
+                {
                     //check to see if all fields are used
                     String nameText = name.getText().toString();
                     String notes = description.getText().toString();
                     Category selected=(Category)category.getSelectedItem();
 
-                    /*if(selected == -1)
-                        selected = 0;*/
-
-
-                    //int year = picker.getYear();
-                    //int day = picker.getDayOfMonth();
-                    //int month = picker.getMonth();
-
-                    SimpleDateFormat sdf = new SimpleDateFormat();
-                    //Date date = sdf.parse("" + month + "/" + day + "/" + year);
-
                     parser.addNote(nameText, selected.getid(), Calendar.getInstance().getTime(), notes);
-                }catch(Exception e){e.printStackTrace();}
+
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
 
                 dialog.dismiss();
 
