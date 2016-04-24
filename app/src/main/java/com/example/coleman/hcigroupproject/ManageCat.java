@@ -13,6 +13,8 @@ import com.example.coleman.adapters.ColorAdapter;
 import com.example.coleman.app_code.Category;
 import com.example.coleman.xml.DataParser;
 
+import java.util.ArrayList;
+
 /**
  * Created by coleman on 4/23/16.
  */
@@ -66,6 +68,8 @@ public class ManageCat
                 {
                     e.printStackTrace();
                 }
+
+
 
                 dialog.dismiss();
 

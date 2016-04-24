@@ -21,7 +21,9 @@
             android:id="@+id/nameText"
             android:layout_weight="1"
             android:maxLines="1"
-            android:maxLength="35" />
+            android:maxLength="35"
+            android:textSize="20dp"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -47,7 +49,8 @@
             android:id="@+id/categoryText"
             android:text="Category: "
             android:textColor="@color/white"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="20dp"/>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +72,8 @@
             android:text="Notes:"
             android:textColor="@color/white"
             android:id="@+id/descriptionText"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"

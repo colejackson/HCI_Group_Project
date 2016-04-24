@@ -2,6 +2,7 @@ package com.example.coleman.adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,9 +61,16 @@ public class CategoryManageAdapter extends ArrayAdapter<Category>
         activeBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("TODO","ACTIVE BOX VALUE CHANGED");
                 target.setActive(isChecked);
+                if(isChecked){
+                    dp.addFilter(target);
+                }else{
+                    dp.removeFilter(target);
+                }
             }
         });
+        dp.addFilter(target);
 
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

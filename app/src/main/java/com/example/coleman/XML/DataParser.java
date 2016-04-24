@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class DataParser
 
     private ArrayList<Todo> data;
     private ArrayList<Category> categories;
+    private ArrayList<Category> filters;
 
     public DataParser(Context context)
     {
@@ -56,6 +58,8 @@ public class DataParser
             data=new ArrayList<>();
             Log.d("TODO","data length "+data.size());
             categories=new ArrayList<>();
+
+            filters=new ArrayList<Category>();
 
             parseData();
         }
@@ -157,7 +161,7 @@ public class DataParser
         this.sort();
 
         try{
-            file.delete();
+            //file.delete();
 
             out = new PrintWriter(file);
             out.print("<base>");
@@ -232,6 +236,14 @@ public class DataParser
         }
 
         return temp.toArray(new Todo[temp.size()]);
+    }
+
+    public void addFilter(Category filter){
+        filters.add(filter);
+    }
+
+    public void removeFilter(Category filter){
+        filters.remove(filter);
     }
 
     public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}

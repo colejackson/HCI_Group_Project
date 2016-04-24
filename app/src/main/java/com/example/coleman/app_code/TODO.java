@@ -1,5 +1,7 @@
 package com.example.coleman.app_code;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class Todo implements Items
         this.name = name;
         this.note = note;
         this.dueDate = date;
+        Log.d("TODO","THE CATEGORY IS "+cat);
         this.cat = cat;
         this.eventid = id;
     }
