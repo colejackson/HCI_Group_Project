@@ -13,7 +13,8 @@
         android:id="@+id/greeting"
         android:text="No notes found. Please add a new note!"
         android:textSize="20dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:textAlignment="center" />
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
@@ -35,10 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:clickable="true"
-            android:src="@drawable/ic_add_24dp"
             app:layout_anchor="@id/drawer_layout"
             app:layout_anchorGravity="bottom|right|end"
-            app:backgroundTint="#FF0000"
+            app:backgroundTint="#2ae0dd"
             app:rippleColor="#FFF"
             android:layout_gravity="right|bottom" />
 

@@ -325,6 +325,11 @@ public class DataParser
         return this.mode;
     }
 
+    public int getPos(Category c)
+    {
+        return categories.indexOf(c);
+    }
+
     private boolean checkID(int id, int mode)
     {
         ArrayList<? extends Items> stuff = ((mode == CATEGORY) ? categories : data);

@@ -43,8 +43,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
     Boolean expanded = false;
     Boolean isOn = false;
 
-    boolean initd = false;
-    
+    int current = 0;
+
     public TodoAdapter(Activity context, Todo[] events, DataParser dp)
     {
         super(context, R.layout.todo_item, events);
@@ -52,10 +52,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         this.context = context;
         this.events = events;
         this.dp = dp;
-    }
-
-    public void updateTodo(Todo[] events){
-        this.events=events;
     }
 
     public View getView(int position, View view, final ViewGroup parent)
@@ -93,22 +89,35 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         hiddenrow.setOnTouchListener(ostl);
         notes.setOnTouchListener(ostl);
 
-        hiddenrow.setVisibility(View.GONE);
-        notes.setVisibility(View.GONE);
+        int c = t.getCategory().getColor();
+        int transparent = Color.argb(60, Color.red(c), Color.green(c), Color.blue(c));
+        item.setBackgroundColor(transparent);
 
-        category.setAdapter(new CatagoryAdapter(this.context, dp.getCategory()));
+        hiddenrow.setVisibility(View.GONE);
+
+        Category[] ca = new Category[dp.getCategory().length];
+        for(int i = 0; i < dp.getCategory().length; i++)
+        {
+            if(dp.getCategory()[i].getid() == t.getCategory().getid())
+                ca[0] = dp.getCategory()[i];
+            else if(ca[0] == null)
+                ca[i+1] = dp.getCategory()[i];
+            else
+                ca[i] = dp.getCategory()[i];
+        }
+
+        category.setAdapter(new CatagoryAdapter(this.context, ca));
 
         dateButton.setText(t.getDate());
 
         notes.setText(events[position].getNote());
         name.setText(events[position].getName());
 
-        expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
+        expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
 
         expand.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (expanded)
-                {
+                if (expanded) {
                     expanded = false;
                     //reset button image (pointing up)
 
@@ -117,27 +126,24 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     t.setNote(notes.getText().toString());
 
                     dp.updateNote(t);
-                    ((Main)context).update();
+                    ((Main) context).update();
 
                     hiddenrow.setVisibility(View.GONE);
-                    notes.setVisibility(View.GONE);
 
                     expand.setImageResource(android.R.color.transparent);
-                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
+                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
                     //set name and date to UNEDITABLE
                     dateButton.setClickable(false);
 
                     //SAVE ALL INPUT
-                }
-                else
-                {
+                } else {
                     expanded = true;
 
                     hiddenrow.setVisibility(View.VISIBLE);
-                    notes.setVisibility(View.VISIBLE);
+
                     //reset button image (pointing down)
                     expand.setImageResource(android.R.color.transparent);
-                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
+                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to EDITABLE
                     dateButton.setClickable(true);
                 }
@@ -156,7 +162,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
             }
         });
-        
+
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -164,8 +170,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
                 //TODO for this action listener...
                 //only execute if switch is "on"
-                if (isOn)
-                {
+                if (isOn) {
                     SetDate creator = new SetDate(context, t);
                     creator.showTodo();
                 }

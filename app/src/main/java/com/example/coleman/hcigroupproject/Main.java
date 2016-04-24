@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -83,6 +84,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
                 creater.showTodo();
             }
         });
+
+        FAB.setBackgroundResource(R.drawable.ic_add_circle_outline_24dp);
     }
 
     @Override

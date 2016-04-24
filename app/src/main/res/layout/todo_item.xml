@@ -64,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:id="@+id/category"
-                android:layout_weight="5" />
+                android:layout_weight="5"
+                android:background="#FFFFFF" />
 
             <Switch
                 android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SWIPE TO DELETE"
+                android:text="SWIPE TO DELETE >>>"
                 android:id="@+id/textView2"
                 android:layout_weight="4"
                 android:textAlignment="center"
