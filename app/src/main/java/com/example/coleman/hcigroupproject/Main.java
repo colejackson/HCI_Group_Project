@@ -13,9 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.coleman.adapters.TodoAdapter;
+import com.example.coleman.app_code.Category;
+import com.example.coleman.app_code.Todo;
 import com.example.coleman.xml.DataParser;
+
+import java.util.ArrayList;
 
 public class Main extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
@@ -25,6 +30,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
     private ListView events;
     private AddTodo creater;
     private Context context;
+    private TextView greeting;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -54,6 +60,7 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        greeting=(TextView) findViewById(R.id.greeting);
         events = (ListView) findViewById(R.id.events);
 
         update();
@@ -111,9 +118,15 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
 
     public void update()
     {
-        TodoAdapter adapter = new TodoAdapter(this, parser.getData(), parser);
+
+        TodoAdapter adapter=new TodoAdapter(this,parser.getData(),parser);
+
+        if(parser.getData().length>0){
+            greeting.setVisibility(View.GONE);
+        }
 
         events.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     public DataParser getParser()

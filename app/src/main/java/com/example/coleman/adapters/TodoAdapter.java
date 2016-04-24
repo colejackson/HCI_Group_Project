@@ -35,7 +35,7 @@ import java.util.Date;
 public class TodoAdapter extends ArrayAdapter<Todo>
 {
     private final Activity context;
-    private final Todo[] events;
+    private Todo[] events;
     private final DataParser dp;
 
     Boolean expanded = false;
@@ -48,6 +48,10 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         this.context = context;
         this.events = events;
         this.dp = dp;
+    }
+
+    public void updateTodo(Todo[] events){
+        this.events=events;
     }
 
     public View getView(int position, View view, final ViewGroup parent)
@@ -82,7 +86,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final ImageButton expand = (ImageButton) view.findViewById(R.id.expand);
         
         hiddenrow.setVisibility(View.GONE);
-        notes.setVisibility(View.GONE);
 
         category.setAdapter(new CatagoryAdapter(this.context, dp.getCategory()));
 
@@ -98,7 +101,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     //reset button image (pointing up)
 
                     hiddenrow.setVisibility(View.GONE);
-                    notes.setVisibility(View.GONE);
 
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
@@ -106,6 +108,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     name.setEnabled(false);
                     dateButton.setEnabled(false);
                     dateButton.setClickable(false);
+                    notes.setEnabled(false);
+                    notes.setFocusable(false);
 
                     //SAVE ALL INPUT
 
@@ -121,7 +125,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     dp.updateNote(t);
 
                     hiddenrow.setVisibility(View.VISIBLE);
-                    notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
@@ -129,6 +132,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     name.setEnabled(true);
                     dateButton.setEnabled(true);
                     dateButton.setClickable(true);
+                    notes.setEnabled(true);
+                    notes.setFocusable(true);
 
                 }
                 ((View)((View)((View)v.getParent()).getParent()).getParent()).invalidate();

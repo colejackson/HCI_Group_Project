@@ -86,10 +86,11 @@ public class AddTodo {
                     //check to see if all fields are used
                     String nameText = name.getText().toString();
                     String notes = description.getText().toString();
-                    int selected=category.getSelectedItemPosition();
+                    Category selected=(Category)category.getSelectedItem();
 
-                    if(selected == -1)
-                        selected = 0;
+                    /*if(selected == -1)
+                        selected = 0;*/
+
 
                     //int year = picker.getYear();
                     //int day = picker.getDayOfMonth();
@@ -98,7 +99,7 @@ public class AddTodo {
                     SimpleDateFormat sdf = new SimpleDateFormat();
                     //Date date = sdf.parse("" + month + "/" + day + "/" + year);
 
-                    parser.addNote(nameText, selected, Calendar.getInstance().getTime(), notes);
+                    parser.addNote(nameText, selected.getid(), Calendar.getInstance().getTime(), notes);
                 }catch(Exception e){e.printStackTrace();}
 
                 dialog.dismiss();

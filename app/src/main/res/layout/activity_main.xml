@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.coleman.hcigroupproject.Main">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/greeting"
+        android:text="No notes found. Please add a new note!"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp" />
+
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
     <FrameLayout
