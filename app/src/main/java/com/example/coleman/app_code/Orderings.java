@@ -62,5 +62,13 @@ public enum Orderings implements Comparator<Todo>
                 return 1;
             }
         }
+    },
+
+    RANDOM {
+        @Override
+        public int compare(Todo lhs, Todo rhs)
+        {
+            return 0;
+        }
     };
 }

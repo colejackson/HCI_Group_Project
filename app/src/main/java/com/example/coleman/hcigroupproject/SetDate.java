@@ -41,7 +41,7 @@ public class SetDate
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.date_picker);
-        dialog.setTitle("Manage Categories");
+        dialog.setTitle("Set Date");
 
         dp = (DatePicker) dialog.findViewById(R.id.picker);
         can = (Button) dialog.findViewById(R.id.date_can);

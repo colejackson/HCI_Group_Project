@@ -48,7 +48,7 @@ public class AddTodo {
     public void showTodo(){
         dialog=new Dialog(a);
         dialog.setContentView(R.layout.new_todo);
-        dialog.setTitle("       Create New Note");
+        dialog.setTitle("Create New Todo");
 
         name=(EditText)dialog.findViewById(R.id.name);
         description=(EditText)dialog.findViewById(R.id.description);

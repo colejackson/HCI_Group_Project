@@ -46,7 +46,7 @@ public class SortTodo
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.sort_todo);
-        dialog.setTitle("             Sort Todo");
+        dialog.setTitle("Sort Todos");
 
         group = (RadioGroup) dialog.findViewById(R.id.group);
 
@@ -57,6 +57,27 @@ public class SortTodo
 
         cancel = (Button) dialog.findViewById(R.id.can);
         finish = (Button) dialog.findViewById(R.id.okay);
+
+        Orderings o = parser.getOrdering();
+
+        if(o == Orderings.TIME_ASC)
+        {
+            ca.setChecked(true);
+        }
+        else if(o == Orderings.TIME_DESC)
+        {
+            cd.setChecked(true);
+        }
+        else if(o == Orderings.BY_CAT)
+        {
+            bc.setChecked(true);
+        }
+        else
+        {
+            ran.setChecked(true);
+        }
+
+        group.setSelected(true);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

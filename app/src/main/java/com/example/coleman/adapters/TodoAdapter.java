@@ -91,6 +91,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         notes.setText(events[position].getNote());
         name.setText(events[position].getName());
 
+        expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
+
         expand.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (expanded) {
@@ -124,7 +126,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
                     expand.setImageResource(android.R.color.transparent);
-                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
+                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
                     //set name and date to EDITABLE
                     name.setEnabled(true);
                     dateButton.setEnabled(true);

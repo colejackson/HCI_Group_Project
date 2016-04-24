@@ -311,11 +311,17 @@ public class DataParser
     public void shuffle()
     {
         Collections.shuffle(data);
+        setOrdering(Orderings.RANDOM);
     }
 
     public void setOrdering(Orderings o)
     {
         this.mode = o;
+    }
+
+    public Orderings getOrdering()
+    {
+        return this.mode;
     }
 
     private boolean checkID(int id, int mode)

@@ -37,7 +37,7 @@ public class ManageCat
     {
         dialog = new Dialog(parent);
         dialog.setContentView(R.layout.manage_outer);
-        dialog.setTitle("       Manage Categories");
+        dialog.setTitle("Manage Categories");
 
         ListView list = (ListView) dialog.findViewById(R.id.man_list);
         list.setAdapter(new CategoryManageAdapter(parent, ((Main)parent).getParser().getCategory()));
