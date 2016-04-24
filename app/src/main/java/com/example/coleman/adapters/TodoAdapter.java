@@ -131,12 +131,6 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
                     //set name and date to EDITABLE
-
-                    dateButton.setClickable(true);
-                    notes.setEnabled(true);
-                    notes.setFocusable(true);
-
-
                     dateButton.setClickable(true);
                 }
 

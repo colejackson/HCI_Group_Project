@@ -227,7 +227,7 @@ public class DataParser
      */
     public Todo[] getData()
     {
-        ArrayList<Todo> temp = new ArrayList();
+        ArrayList<Todo> temp = new ArrayList<>();
 
         for(Todo t : data)
         {
@@ -236,6 +236,7 @@ public class DataParser
         }
 
         return temp.toArray(new Todo[temp.size()]);
+
     }
 
     public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}

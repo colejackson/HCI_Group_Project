@@ -90,7 +90,6 @@ public class AddTodo {
                     Category selected=(Category)category.getSelectedItem();
 
                     parser.addNote(nameText, selected.getid(), Calendar.getInstance().getTime(), notes);
-
                 }
                 catch(Exception e)
                 {
