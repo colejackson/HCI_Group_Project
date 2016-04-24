@@ -93,9 +93,9 @@ public class DataParser
             }
         }
 
-        if(categories.size() == 0)
+        if(!Category.hasDefault(categories))
         {
-            categories.add(new Category(0, "DEFAULT", Color.BLUE));
+            categories.add(new Category());
         }
 
         //then todos
@@ -144,7 +144,7 @@ public class DataParser
                 }
 
                 if(category == null)
-                    category = new Category(0, "DEFAULT", Color.BLUE);
+                    category = new Category();
 
                 Todo todo = new Todo(name, description, date, category, id);
                 data.add(todo);
@@ -197,7 +197,7 @@ public class DataParser
                         out.print(todo.getDate());
                     out.print("</date>");
                     out.print("<category>");
-                        out.print(todo.getCategory());
+                        out.print(todo.getCategory().getid());
                     out.print("</category>");
                     out.print("<id>");
                         out.print(todo.getid());
@@ -223,7 +223,15 @@ public class DataParser
      */
     public Todo[] getData()
     {
-        return data.toArray(new Todo[data.size()]);
+        ArrayList<Todo> temp = new ArrayList();
+
+        for(Todo t : data)
+        {
+            if(t.getCategory().getActive())
+                temp.add(t);
+        }
+
+        return temp.toArray(new Todo[temp.size()]);
     }
 
     public Category[] getCategory(){return categories.toArray(new Category[categories.size()]);}
