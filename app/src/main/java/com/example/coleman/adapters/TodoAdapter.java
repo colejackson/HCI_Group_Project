@@ -2,6 +2,8 @@ package com.example.coleman.adapters;
 
 import android.app.Activity;
 import android.gesture.GestureOverlayView;
+import android.graphics.Color;
+import android.text.method.KeyListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -95,26 +97,10 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
         expand.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (expanded) {
+                if (expanded)
+                {
                     expanded = false;
                     //reset button image (pointing up)
-
-                    hiddenrow.setVisibility(View.GONE);
-                    notes.setVisibility(View.GONE);
-
-                    expand.setImageResource(android.R.color.transparent);
-                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
-                    //set name and date to UNEDITABLE
-                    name.setEnabled(false);
-                    dateButton.setEnabled(false);
-                    dateButton.setClickable(false);
-
-                    //SAVE ALL INPUT
-
-                }
-                else
-                {
-                    expanded = true;
 
                     t.setName(name.getText().toString());
                     t.setCategory((Category) category.getSelectedItem());
@@ -122,19 +108,32 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
                     dp.updateNote(t);
 
+                    hiddenrow.setVisibility(View.GONE);
+                    notes.setVisibility(View.GONE);
+
+                    expand.setImageResource(android.R.color.transparent);
+                    expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
+                    //set name and date to UNEDITABLE
+                    dateButton.setClickable(false);
+
+                    //SAVE ALL INPUT
+                }
+                else
+                {
+                    expanded = true;
+
                     hiddenrow.setVisibility(View.VISIBLE);
                     notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
                     //set name and date to EDITABLE
-                    name.setEnabled(true);
-                    dateButton.setEnabled(true);
-                    dateButton.setClickable(true);
 
+                    dateButton.setClickable(true);
                 }
-                ((View)((View)((View)v.getParent()).getParent()).getParent()).invalidate();
-                ((View)((View)((View)v.getParent()).getParent()).getParent()).refreshDrawableState();
+
+                ((View) ((View) ((View) v.getParent()).getParent()).getParent()).invalidate();
+                ((View) ((View) ((View) v.getParent()).getParent()).getParent()).refreshDrawableState();
             }
         });
 
