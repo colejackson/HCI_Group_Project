@@ -56,13 +56,13 @@ public class AddTodo {
         category=(Spinner)dialog.findViewById(R.id.category);
 
         Category[] ca = parser.getCategory();
-        Log.d("TODO","LENGTH OF CA: "+ca.length);
         if(ca.length == 0)
         {
-            ca = new Category[1];
-            ca[0] =  new Category(0, "Default", Color.BLUE);
-        }
+            dialog.setContentView(R.layout.warning);
+            dialog.show();
 
+            return;
+        }
 
         category.setAdapter(new CatagoryAdapter(a, ca));
         //picker=(DatePicker)view.find

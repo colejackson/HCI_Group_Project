@@ -33,13 +33,11 @@ public class DataParser
     private Orderings mode;
 
     private File file;
-    private File dir;
     private XMLReader reader;
     private PrintWriter out;
 
     private ArrayList<Todo> data;
     private ArrayList<Category> categories;
-    private ArrayList<Category> filters;
 
     public DataParser(Context context)
     {
@@ -58,8 +56,6 @@ public class DataParser
             data=new ArrayList<>();
             Log.d("TODO","data length "+data.size());
             categories=new ArrayList<>();
-
-            filters=new ArrayList<Category>();
 
             parseData();
         }
@@ -95,11 +91,6 @@ public class DataParser
                 Category newCat=new Category(id,name,color);
                 categories.add(newCat);
             }
-        }
-
-        if(!Category.hasDefault(categories))
-        {
-            categories.add(new Category());
         }
 
         //then todos
@@ -146,9 +137,6 @@ public class DataParser
                         category = c;
                     }
                 }
-
-                if(category == null)
-                    category = new Category();
 
                 Todo todo = new Todo(name, description, date, category, id);
                 data.add(todo);

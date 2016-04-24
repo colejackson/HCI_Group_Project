@@ -22,14 +22,6 @@ public class Category implements Items
         this.active = true;
     }
 
-    public Category()
-    {
-        this.id = 0;
-        this.name = "Default";
-        this.color = -148594;
-        this.active = true;
-    }
-
     public int getid()
     {
         return id;
@@ -65,21 +57,6 @@ public class Category implements Items
     public void setActive(boolean b)
     {
         this.active = b;
-    }
-
-    public static boolean hasDefault(ArrayList<Category> ca)
-    {
-        Category defalt = new Category();
-
-        for(Category c : ca)
-        {
-            if(c.getid() == defalt.getid())
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public static boolean isActive(ArrayList<Category> ca, int i)

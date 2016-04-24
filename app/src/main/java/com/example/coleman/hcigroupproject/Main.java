@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.coleman.adapters.TodoAdapter;
+import com.example.coleman.app_code.CatColors;
 import com.example.coleman.app_code.Category;
 import com.example.coleman.app_code.Todo;
 import com.example.coleman.xml.DataParser;
@@ -31,6 +32,8 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
     private AddTodo creater;
     private Context context;
     private TextView greeting;
+
+    private boolean firsttime = true;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -64,6 +67,12 @@ public class Main extends Activity implements NavigationDrawerFragment.Navigatio
         events = (ListView) findViewById(R.id.events);
 
         update();
+
+        if(firsttime)
+        {
+            parser.addCat("Default", CatColors.WHITE.id);
+            firsttime = false;
+        }
 
         FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
         FAB.setOnClickListener(new View.OnClickListener()
