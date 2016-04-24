@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/category_name"
-    android:textColor="#141313">
+    android:textColor="#141313"
+    android:maxLines="1"
+    android:maxLength="35"
+    android:singleLine="true">
 
 
 </TextView>

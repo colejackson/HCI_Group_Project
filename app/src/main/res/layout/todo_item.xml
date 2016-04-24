@@ -20,7 +20,10 @@
             android:padding="10dp"
             android:text="TODO NAME"
             android:id="@+id/name"
-            android:layout_weight="6" />
+            android:layout_weight="6"
+            android:maxLines="1"
+            android:maxLength="35"
+            android:singleLine="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -78,13 +81,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:maxLength="100"
+            android:maxLength="300"
             android:maxLines="3"
             android:text="Notes about my Todo"
             android:id="@+id/notes"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="5"/>
+            android:layout_weight="5"
+            android:longClickable="false"
+            android:editable="true" />
     </LinearLayout>
 </LinearLayout>

@@ -16,7 +16,10 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/cat_name"
-        android:layout_weight="5" />
+        android:layout_weight="5"
+        android:minLines="1"
+        android:maxLength="35"
+        android:singleLine="true" />
 
     <Spinner
         android:layout_width="wrap_content"

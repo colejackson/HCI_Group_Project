@@ -16,7 +16,9 @@
             android:id="@+id/catNameLabel"
             android:text="Name:"
             android:layout_weight="1"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:maxLength="35" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -27,7 +29,10 @@
             android:layout_toEndOf="@+id/colorLabel"
             android:layout_weight="1"
             android:lines="1"
-            android:maxHeight="24dp" />
+            android:maxHeight="24dp"
+            android:maxLength="35"
+            android:maxLines="1"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,7 +50,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="1"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:maxLength="35" />
 
         <Spinner
             android:layout_width="90dp"
