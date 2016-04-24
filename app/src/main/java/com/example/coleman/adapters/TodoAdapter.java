@@ -88,7 +88,7 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final ImageButton expand = (ImageButton) view.findViewById(R.id.expand);
         
         hiddenrow.setVisibility(View.GONE);
-
+        
         category.setAdapter(new CatagoryAdapter(this.context, dp.getCategory()));
 
         dateButton.setText(t.getDate());

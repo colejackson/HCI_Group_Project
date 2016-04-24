@@ -33,7 +33,7 @@
             android:maxHeight="24dp"
             android:maxLines="1"
             android:maxLength="35"
-            android:singleLine="true" />
+            android:singleLine="true"/>
 
     </LinearLayout>
 

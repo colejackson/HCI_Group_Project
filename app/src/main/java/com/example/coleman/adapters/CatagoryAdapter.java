@@ -1,6 +1,7 @@
 package com.example.coleman.adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,20 @@ public class CatagoryAdapter extends ArrayAdapter<Category>{
 
         TextView name=(TextView) rowView.findViewById(R.id.category_name);
         name.setText(events[position].getName());
+        name.setTextColor(Color.WHITE);
 
         return rowView;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView,ViewGroup parent){
+        View correctFile=LayoutInflater.from(getContext()).inflate(R.layout.catagory_layout, parent, false);
+        TextView view=(TextView)correctFile.findViewById(R.id.category_name);
+
+        view.setTextColor(events[position].getColor());
+        view.setText(events[position].getName());
+        view.setBackgroundColor(Color.WHITE);
+
+        return view;
     }
 }
