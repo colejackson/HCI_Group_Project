@@ -76,20 +76,38 @@
                 android:layout_weight="5" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:maxLength="300"
-            android:maxLines="3"
-            android:text="Notes about my Todo"
-            android:id="@+id/notes"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="5"
-            android:longClickable="false"
-            android:editable="true" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:maxLength="300"
+                android:maxLines="3"
+                android:text="Notes about my Todo"
+                android:id="@+id/notes"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="5"
+                android:longClickable="false"
+                android:editable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SWIPE TO DELETE"
+                android:id="@+id/textView2"
+                android:layout_weight="4"
+                android:textAlignment="center"
+                android:textColor="#8f3939"
+                android:background="#eedede"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

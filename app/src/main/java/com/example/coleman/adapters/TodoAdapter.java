@@ -42,6 +42,8 @@ public class TodoAdapter extends ArrayAdapter<Todo>
 
     Boolean expanded = false;
     Boolean isOn = false;
+
+    boolean initd = false;
     
     public TodoAdapter(Activity context, Todo[] events, DataParser dp)
     {
@@ -75,9 +77,9 @@ public class TodoAdapter extends ArrayAdapter<Todo>
             view = LayoutInflater.from(getContext()).inflate(R.layout.todo_item, parent, false);
         }
 
-        OnSwipeTouchListener ostl = new OnSwipeTouchListener(context, dp, events[position]);
+        final LinearLayout item = (LinearLayout) view.findViewById(R.id.item);
 
-        view.setOnTouchListener(ostl);
+        OnSwipeTouchListener ostl = new OnSwipeTouchListener(context, dp, events[position]);
 
         final LinearLayout hiddenrow = (LinearLayout) view.findViewById(R.id.hiddenrow);
         final TextView notes = (TextView) view.findViewById(R.id.notes);
@@ -86,8 +88,13 @@ public class TodoAdapter extends ArrayAdapter<Todo>
         final Spinner category = (Spinner) view.findViewById(R.id.category);
         final Switch usedate = (Switch) view.findViewById(R.id.usedate);
         final ImageButton expand = (ImageButton) view.findViewById(R.id.expand);
-        
+
+        item.setOnTouchListener(ostl);
+        hiddenrow.setOnTouchListener(ostl);
+        notes.setOnTouchListener(ostl);
+
         hiddenrow.setVisibility(View.GONE);
+        notes.setVisibility(View.GONE);
 
         category.setAdapter(new CatagoryAdapter(this.context, dp.getCategory()));
 
@@ -110,15 +117,15 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     t.setNote(notes.getText().toString());
 
                     dp.updateNote(t);
+                    ((Main)context).update();
 
                     hiddenrow.setVisibility(View.GONE);
+                    notes.setVisibility(View.GONE);
 
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_24dp);
                     //set name and date to UNEDITABLE
                     dateButton.setClickable(false);
-                    notes.setEnabled(false);
-                    notes.setFocusable(false);
 
                     //SAVE ALL INPUT
                 }
@@ -127,15 +134,13 @@ public class TodoAdapter extends ArrayAdapter<Todo>
                     expanded = true;
 
                     hiddenrow.setVisibility(View.VISIBLE);
+                    notes.setVisibility(View.VISIBLE);
                     //reset button image (pointing down)
                     expand.setImageResource(android.R.color.transparent);
                     expand.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_24dp);
                     //set name and date to EDITABLE
                     dateButton.setClickable(true);
                 }
-
-                ((View) ((View) ((View) v.getParent()).getParent()).getParent()).invalidate();
-                ((View) ((View) ((View) v.getParent()).getParent()).getParent()).refreshDrawableState();
             }
         });
 
